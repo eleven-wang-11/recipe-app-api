@@ -27,7 +27,17 @@ class AdminSiteTests(TestCase):
     def test_users_lists(self):
         """Test that users are listed on page."""
         url = reverse('admin:core_user_changelist')
+        print(url)
+
         res = self.client.get(url)
 
         self.assertContains(res, self.user.name)
         self.assertContains(res, self.user.email)
+
+    def test_edit_user_page(self):
+        """Test the edit user page works."""
+        url = reverse('admin:core_user_change', args=[self.user.id])
+        print(url)
+        res = self.client.get(url)
+
+        self.assertEqual(res.status_code, 200)
