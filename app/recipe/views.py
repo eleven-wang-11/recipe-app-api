@@ -53,13 +53,14 @@ class TagViewSet(mixins.DestroyModelMixin,
         return self.queryset.filter(user=self.request.user).order_by('-name')
 
 
-class IngredientViewSet(mixins.ListModelMixin,
+class IngredientViewSet(mixins.UpdateModelMixin,
+                        mixins.ListModelMixin,
                         viewsets.GenericViewSet):
     """Manage ingredients in the database."""
     serializer_class = serializers.IngredientSerializer
     queryset = Ingredient.objects.all()
-    authentication_classes = [TokenAuthentication]
-    permission_classes = [IsAuthenticated]
+    authentication_classes = [TokenAuthentication] #use token to authenticate
+    permission_classes = [IsAuthenticated] #all users must be authenticated to use the endpoint
 
     def get_queryset(self):
         """Filter queryset to authenticated user."""
