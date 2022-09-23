@@ -12,15 +12,18 @@ from user.serializers import (
 )
 
 class CreateUserView(generics.CreateAPIView):
+    #CreateAPIView only supports post request
     """Create a new user in the system."""
     serializer_class = UserSerializer
 
 class CreateTokenView(ObtainAuthToken):
+    #ObtainAuthToken supports only post request
     """Create a new auth token for user."""
     serializer_class = AuthTokenSerializer
     renderer_classes = api_settings.DEFAULT_RENDERER_CLASSES
 
 class ManageUserView(generics.RetrieveUpdateAPIView):
+    #RetrieveUpdateAPIView supports get, put and patch
     """Manage the authenticated user."""
     serializer_class = UserSerializer
     authentication_classes = [authentication.TokenAuthentication]
