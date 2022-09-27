@@ -15,7 +15,7 @@ from django.contrib.auth.models import (
 def recipe_image_file_path(instance, filename):
     """Generate file path for new recipe image."""
     ext = os.path.splitext(filename)[1]
-    filename = f'{uuid.uuid4()}{ext}'
+    filename = f'{uuid.uuid4()}{ext}' #uuid4()generate a random uuid
 
     return os.path.join('uploads', 'recipe', filename)
 
